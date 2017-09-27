@@ -29,9 +29,9 @@ namespace GamesApp
             finalFantasy12 = new Game("Final Fantasy XII", "JRPG", "PS2", 21.50);
             darksiders = new Game("Darksiders", "Action", "PC", 7.50);
 
-            gameApp.VoegGameToe(skyrim);
-            gameApp.VoegGameToe(finalFantasy12);
-            gameApp.VoegGameToe(darksiders);
+            gameApp.AddGame(skyrim);
+            gameApp.AddGame(finalFantasy12);
+            gameApp.AddGame(darksiders);
 
             gameNames = new BindingList<string>();
 
@@ -40,7 +40,7 @@ namespace GamesApp
 
         private void BtAddGame_Click(object sender, EventArgs e)
         {
-            gameApp.VoegGameToe(new Game(tbTitle.Text, tbGenre.Text, tbPlatform.Text, (double)nudPrice.Value));
+            gameApp.AddGame(new Game(tbTitle.Text, tbGenre.Text, tbPlatform.Text, (double)nudPrice.Value));
             UpdateGameList();
         }
 

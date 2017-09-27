@@ -16,7 +16,7 @@ namespace GamesApp
             Games = new List<Game>();
         }
 
-        public bool VoegGameToe(Game game)
+        public bool AddGame(Game game)
         {
             foreach(Game checkGame in Games)
             {
