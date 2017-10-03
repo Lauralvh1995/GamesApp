@@ -9,11 +9,11 @@ namespace GamesApp
     public class Game
     {
         public string Title { get; }
-        public string Genre { get; }
-        public string Platform { get; }
-        public double Price { get; }
+        public string Genre { get;  }
+        public string Platform { get;  }
+        public decimal Price { get;  }
 
-        public Game(string title, string genre, string platform, double price)
+        public Game(string title, string genre, string platform, decimal price)
         {
             Title = title;
             Genre = genre;

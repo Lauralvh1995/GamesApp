@@ -13,9 +13,6 @@ namespace GamesApp
     public partial class Form1 : Form
     {
         GameApp gameApp;
-        Game skyrim;
-        Game finalFantasy12;
-        Game darksiders;
 
         BindingList<string> gameNames;
 
@@ -24,14 +21,7 @@ namespace GamesApp
             InitializeComponent();
 
             gameApp = new GameApp();
-
-            skyrim = new Game("The Elder Scrolls V: Skyrim", "WRPG", "PC", 30.00);
-            finalFantasy12 = new Game("Final Fantasy XII", "JRPG", "PS2", 21.50);
-            darksiders = new Game("Darksiders", "Action", "PC", 7.50);
-
-            gameApp.AddGame(skyrim);
-            gameApp.AddGame(finalFantasy12);
-            gameApp.AddGame(darksiders);
+            gameApp.AddDummies();
 
             gameNames = new BindingList<string>();
 
@@ -40,14 +30,48 @@ namespace GamesApp
 
         private void BtAddGame_Click(object sender, EventArgs e)
         {
-            gameApp.AddGame(new Game(tbTitle.Text, tbGenre.Text, tbPlatform.Text, (double)nudPrice.Value));
-            UpdateGameList();
+            string title = tbTitle.Text;
+            if(string.IsNullOrEmpty(title))
+            {
+                MessageBox.Show("A game must have a title");
+                return;
+            }
+            string genre = tbGenre.Text;
+            if (string.IsNullOrEmpty(genre))
+            {
+                MessageBox.Show("A game must have a genre");
+                return;
+            }
+            string platform = tbPlatform.Text;
+            if (string.IsNullOrEmpty(platform))
+            {
+                MessageBox.Show("A game must have a platform");
+                return;
+            }
+            decimal price = nudPrice.Value;
+            if(price <0)
+            {
+                MessageBox.Show("A game must cost at least €0,00");
+                return;
+            }
+
+            Game game = new Game(title, genre, platform, price);
+
+            if (gameApp.AddGame(game))
+            {
+                MessageBox.Show("Added " + game.Title);
+                UpdateGameList();
+            }
+            else
+            {
+                MessageBox.Show("You already own this game!");
+            }
         }
 
         private void UpdateGameList()
         {
             gameNames.Clear();
-            foreach (Game game in gameApp.Games)
+            foreach (Game game in gameApp.GetGames())
             {
                 gameNames.Add(game.ToString());
             }
