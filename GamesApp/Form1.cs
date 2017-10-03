@@ -21,6 +21,7 @@ namespace GamesApp
             InitializeComponent();
 
             gameApp = new GameApp();
+            //Dummies worden aangemaakt via de GameApp. Deze regel kan worden uitgezet.
             gameApp.AddDummies();
 
             gameNames = new BindingList<string>();
@@ -30,6 +31,7 @@ namespace GamesApp
 
         private void BtAddGame_Click(object sender, EventArgs e)
         {
+            //Dit haalt informatie uit de form op, en valideert.
             string title = tbTitle.Text;
             if(string.IsNullOrEmpty(title))
             {
@@ -55,6 +57,7 @@ namespace GamesApp
                 return;
             }
 
+            //Info wordt alleen doorgegeven aan de GameApp als deze klopt.
             Game game = new Game(title, genre, platform, price);
 
             if (gameApp.AddGame(game))
@@ -70,6 +73,7 @@ namespace GamesApp
 
         private void UpdateGameList()
         {
+            //De game list moet worden bijgehouden.
             gameNames.Clear();
             foreach (Game game in gameApp.GetGames())
             {
